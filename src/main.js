@@ -38,6 +38,20 @@ const router = new VueRouter({
     mode: 'history'
 });
 
+// router.beforeEach((to, form, next) => {
+//     if (to.path == '/login' || to.path == '/register') {
+//         next();
+//     } else {
+//         alert('Please login');
+//         next('/login');
+//     }
+// });
+
+// router.afterEach((to, form) => {
+//     alert('afterEach');
+// });
+
+
 new Vue({
     el: '#app',
     router,
