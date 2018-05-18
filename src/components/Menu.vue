@@ -66,42 +66,51 @@ export default {
         return {
             baskets: [],
             getMenuItems: {
-                1: {
-                    'name': 'Duran Pizza',
-                    'des': 'I like duran',
-                    'options': [{
-                        'size': 9,
-                        'price': 38
-                    }, {
-                        'size': 12,
-                        'price': 48
-                    }]
-                },
-                2: {
-                    'name': 'Apple Pizza',
-                    'des': 'I like apple',
-                    'options': [{
-                        'size': 9,
-                        'price': 39
-                    }, {
-                        'size': 12,
-                        'price': 49
-                    }]
-                },
-                3: {
-                    'name': 'ZZZ Pizza',
-                    'des': 'I like zzz',
-                    'options': [{
-                        'size': 9,
-                        'price': 40
-                    }, {
-                        'size': 12,
-                        'price': 10
-                    }]
-                }
+                // 1: {
+                //     'name': 'Duran Pizza',
+                //     'des': 'I like duran',
+                //     'options': [{
+                //         'size': 9,
+                //         'price': 38
+                //     }, {
+                //         'size': 12,
+                //         'price': 48
+                //     }]
+                // },
+                // 2: {
+                //     'name': 'Apple Pizza',
+                //     'des': 'I like apple',
+                //     'options': [{
+                //         'size': 9,
+                //         'price': 39
+                //     }, {
+                //         'size': 12,
+                //         'price': 49
+                //     }]
+                // },
+                // 3: {
+                //     'name': 'ZZZ Pizza',
+                //     'des': 'I like zzz',
+                //     'options': [{
+                //         'size': 9,
+                //         'price': 40
+                //     }, {
+                //         'size': 12,
+                //         'price': 10
+                //     }]
+                // }
             }
 
         };
+    },
+    created() {
+        fetch('https://wd4108341731sftckd.wilddogio.com/menu.json')
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                this.getMenuItems = data;
+            });
     },
     computed: {
         total() {
