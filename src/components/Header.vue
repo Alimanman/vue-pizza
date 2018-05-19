@@ -31,10 +31,18 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
-                <li>
+                <li v-show="!isLogin">
                     <router-link v-bind:to="{name:'loginLink'}" class="nav-link">Login</router-link>
                 </li>
-                <li>
+
+                <li v-show="isLogin">
+                    {{currentUser}}
+                </li>
+                <li v-show="isLogin">
+                    <router-link v-bind:to="{name:'loginLink'}" class="nav-link">LoginOut</router-link>
+                </li>
+
+                <li v-show="!isLogin">
                     <router-link v-bind:to="{name:'registerLink'}" class="nav-link">Register</router-link>
                 </li>
             </ul>
@@ -48,6 +56,14 @@ export default {
         return {
             homeLink: '/'
         };
+    },
+    computed: {
+        currentUser() {
+            return this.$store.getters.currentUser;
+        },
+        isLogin() {
+            return this.$store.getters.isLogin;
+        }
     }
 };
 </script>

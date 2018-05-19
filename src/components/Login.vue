@@ -25,6 +25,9 @@ export default {
             password: ''
         };
     },
+    beforeRouterEnter: (to, form, next) => {
+        next(vm => vm.$store.commit('userStatus', null));
+    },
     methods: {
         onSubmit: function () {
             axios.get('user.json')
@@ -41,10 +44,12 @@ export default {
                     });
 
                     if (result != null && result.length > 0) {
+                        this.$store.commit('userStatus', result[0].email);
                         this.$router.push({ name: 'homeLink' });
 
                     } else {
                         alert('NG');
+                        this.$store.commit('userStatus', null);
                     }
 
                 });

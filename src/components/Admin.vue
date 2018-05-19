@@ -32,7 +32,7 @@ import NewPizza from './NewPizza.vue';
 export default {
     data() {
         return {
-            getMenuItems: []
+            //getMenuItems: []
         };
     },
     components: {
@@ -49,10 +49,20 @@ export default {
                     data[key].id = key;
                     menuArray.push(data[key]);
                 }
-                this.getMenuItems = data;
-                console.log(this.getMenuItems);
+                this.$store.commit('setMenuItems', menuArray);
 
             });
+    },
+    computed: {
+        getMenuItems: {
+            get() {
+                //return this.$store.state.menuItems;
+                return this.$store.getters.getMenuItems;
+            },
+            set() {
+
+            }
+        }
     },
     methods: {
         deleteData(item) {
@@ -64,7 +74,8 @@ export default {
             })
                 .then(res => res.json())
                 .then(data => {
-                    this.$router.push({ name: 'menuLink' });
+                    this.$store.commit('removeMenuItems', item);
+                    //this.$router.push({ name: 'menuLink' });
                 });
         }
     }

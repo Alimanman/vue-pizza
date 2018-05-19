@@ -61,58 +61,68 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
     data() {
         return {
             baskets: [],
-            getMenuItems: {
-                // 1: {
-                //     'name': 'Duran Pizza',
-                //     'des': 'I like duran',
-                //     'options': [{
-                //         'size': 9,
-                //         'price': 38
-                //     }, {
-                //         'size': 12,
-                //         'price': 48
-                //     }]
-                // },
-                // 2: {
-                //     'name': 'Apple Pizza',
-                //     'des': 'I like apple',
-                //     'options': [{
-                //         'size': 9,
-                //         'price': 39
-                //     }, {
-                //         'size': 12,
-                //         'price': 49
-                //     }]
-                // },
-                // 3: {
-                //     'name': 'ZZZ Pizza',
-                //     'des': 'I like zzz',
-                //     'options': [{
-                //         'size': 9,
-                //         'price': 40
-                //     }, {
-                //         'size': 12,
-                //         'price': 10
-                //     }]
-                // }
-            }
+            //getMenuItems: {
+            // 1: {
+            //     'name': 'Duran Pizza',
+            //     'des': 'I like duran',
+            //     'options': [{
+            //         'size': 9,
+            //         'price': 38
+            //     }, {
+            //         'size': 12,
+            //         'price': 48
+            //     }]
+            // },
+            // 2: {
+            //     'name': 'Apple Pizza',
+            //     'des': 'I like apple',
+            //     'options': [{
+            //         'size': 9,
+            //         'price': 39
+            //     }, {
+            //         'size': 12,
+            //         'price': 49
+            //     }]
+            // },
+            // 3: {
+            //     'name': 'ZZZ Pizza',
+            //     'des': 'I like zzz',
+            //     'options': [{
+            //         'size': 9,
+            //         'price': 40
+            //     }, {
+            //         'size': 12,
+            //         'price': 10
+            //     }]
+            // }
+            //}
 
         };
     },
     created() {
-        fetch('https://wd4108341731sftckd.wilddogio.com/menu.json')
+        // fetch('https://wd4108341731sftckd.wilddogio.com/menu.json')
+        //     .then(res => {
+        //         return res.json();
+        //     })
+        //     .then(data => {
+        //         this.getMenuItems = data;
+        //     });
+        axios.get('menu.json')
             .then(res => {
-                return res.json();
-            })
-            .then(data => {
-                this.getMenuItems = data;
+                //this.getMenuItems = res.data;
+                this.$store.commit('setMenuItems', res.data);
             });
     },
     computed: {
+        getMenuItems() {
+            //return this.$store.state.menuItems;
+            return this.$store.getters.getMenuItems;
+        },
         total() {
             let totalCost = 0;
 

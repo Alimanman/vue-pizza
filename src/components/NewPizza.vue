@@ -84,7 +84,9 @@ export default {
                 body: JSON.stringify(data)
             })
                 .then(res => res.json())
-                .then(this.$router.push({ name: 'menuLink' }))
+                .then(res => {
+                    this.$store.commit('pushToMenuItems', data);
+                })
                 .catch(err => console.log(err));
         }
     }
